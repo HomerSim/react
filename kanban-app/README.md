@@ -3,3 +3,4 @@
 
 ## 추가한 패키지
 yarn add serialize-javascript
+yarn add marked
