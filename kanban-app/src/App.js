@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import './App.css';
 import KanbanBoard from './KanbanBoard';
 
+import KanbanBoardContainer from './KanbanBoardContainer';
 
 let cardsList = [
   {
@@ -42,7 +43,10 @@ let cardsList = [
 class App extends Component {
   render () {
     return (
+      <KanbanBoardContainer></KanbanBoardContainer>
+      /*
       <KanbanBoard cards={cardsList}>Hello ~ Homersim</KanbanBoard>
+      */
     );
   }
 }
