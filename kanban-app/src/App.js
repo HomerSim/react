@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 
 import './App.css';
-import KanbanBoard from './KanbanBoard';
+//import KanbanBoard from './KanbanBoard';
 
 import KanbanBoardContainer from './KanbanBoardContainer';
 
+/*
 let cardsList = [
   {
     id : 1,
@@ -39,7 +40,7 @@ let cardsList = [
     ]
   },
 ];
-
+*/
 class App extends Component {
   render () {
     return (
