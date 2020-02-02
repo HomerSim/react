@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import KanbanBoard from './KanbanBoard';
 import 'whatwg-fetch';
 
-const API_URL = "http://kanbanapi.pro-react.com";
+
+//const API_URL = "http://kanbanapi.pro-react.com";
+const API_URL = "https://yts.lt/api/v2/list_movies.json?sort_by=like_count";
 const API_HEADERS = {
     'Content-Type' : 'application/json',
-    Authorization : 'any-string-you-like'
+   
 };
 
 class KanbanBoardContainer extends Component {
@@ -17,10 +19,13 @@ class KanbanBoardContainer extends Component {
     }
 
     componentDidMount() {
-        fetch(API_URL+'/cards', {headers : API_HEADERS})
-        .then((response) => response.json())
+
+        fetch(API_URL)
+        .then(response => response.json())
         .then((responseData) => {
-            this.setState({cards:responseData})
+            let data = responseData.data.movies;
+            console.log(responseData.data.movies);
+            this.setState({cards:data})
             
         })
         .catch((error) => {
