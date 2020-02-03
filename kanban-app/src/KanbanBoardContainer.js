@@ -10,6 +10,7 @@ const API_HEADERS = {
     'Content-Type' : 'application/json',
    
 };
+// 다음단계 넘어가기전에 처리하자........
 
 class KanbanBoardContainer extends Component {
     constructor(){
@@ -33,7 +34,15 @@ class KanbanBoardContainer extends Component {
 
     addTask(cardId, taskName) {
         let cardIndex = this.state.cards.findIndex((card) => card.id === cardId);
-        let newTask = {id:Date.new(), name:taskName, done:false};
+        let newTask = {id:Date.now(), name:taskName, done:false};
+
+        let cards = this.state.cards;
+        let card = cards[cardIndex];
+            card.tasks.push(newTask);
+        
+        this.setState({
+            cards:cards
+        });
 
         /*
         // 새로운 객체를 생성하고 태스크의 배열로 새로운 태스크를 푸시한다. 
@@ -59,8 +68,17 @@ class KanbanBoardContainer extends Component {
     }
 
     deleteTask(cardId, taskId, taskIndex) {
+        
         let cardIndex = this.state.cards.findIndex((card) => card.id === cardId);
-        console.log(cardIndex);
+
+        let cards = this.state.cards;
+        let card = cards[cardIndex];
+            card.tasks.splice(taskIndex,1);
+        
+        this.setState({
+            cards:cards
+        });
+        
         /*
         let nextState = update(this.state.cards, {
             [cardIndex]:{
@@ -79,8 +97,20 @@ class KanbanBoardContainer extends Component {
 
     toggleTask(cardId, taskId, taskIndex) {
         let cardIndex = this.state.cards.findIndex((card)=>card.id === cardId);
-        let newDoneValue;
+   
+        let cards   = this.state.cards;
+        let card    = cards[cardIndex];
+        let task    = card.tasks[taskIndex];
+
+        let done = !task.done;
+            task.done = done;
+
+        this.setState({
+            cards
+        });
+        
         /*
+        let newDoneValue;
         let nextState = update(this.state.cards, {
             [cardIndex]:{
                 tasks:{
