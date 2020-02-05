@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import KanbanBoard from './KanbanBoard';
+import update from 'react-addons-update';
+
 import 'whatwg-fetch';
 import 'babel-polyfill';
+
 
 //const API_URL = "http://kanbanapi.pro-react.com";
 const API_URL = "https://raw.githubusercontent.com/HomerSim/react/master/kanban-app/src/json/kanbandb.json";
@@ -136,6 +139,18 @@ class KanbanBoardContainer extends Component {
        */
     }
 
+    updateCardStatus(cardId, listId) {
+        let cardIndex = this.state.cards.findIndex((card)=>card.id === cardId);
+        let cards = this.state.cards;
+        let card = cards[cardIndex];
+        if (card.status !== listId) {
+            card.status = listId;
+            this.setState({
+                cards : cards
+            
+            });
+        }
+    }
     render(){
         return <KanbanBoard cards={this.state.cards}
                     taskCallbacks={{
