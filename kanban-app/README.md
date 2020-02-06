@@ -11,3 +11,6 @@ yarn add react-addons-css-transition-group
 
 #드래그앤 드랍
 yarn add react-dnd react-dnd-html5-backend
+
+#
+yarn add react-addon-update

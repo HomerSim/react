@@ -7,16 +7,22 @@ class KanbanBoard extends Component {
     render () {
       return (
         <div className="app">
-            <List id="todo" title="TO DO" taskCallbacks={this.props.taskCallbacks} cards={
-                this.props.cards.filter((card) => card.status === "todo")
+            <List id="todo" title="TO DO" 
+                taskCallbacks={this.props.taskCallbacks}
+                cardCallbacks={this.props.cardCallbacks}
+                cards={this.props.cards.filter((card) => card.status === "todo")
             }></List>
 
-            <List id="in-progress" title="In Progress" taskCallbacks={this.props.taskCallbacks} cards={
-                this.props.cards.filter((card) => card.status === "in-progress")
+            <List id="in-progress" title="In Progress" 
+                taskCallbacks={this.props.taskCallbacks} 
+                cardCallbacks={this.props.cardCallbacks}
+                cards={this.props.cards.filter((card) => card.status === "in-progress")
             }></List>
 
-            <List id="done" title="Done" taskCallbacks={this.props.taskCallbacks} cards={
-                this.props.cards.filter((card) => card.status === "done")
+            <List id="done" title="Done" 
+                taskCallbacks={this.props.taskCallbacks} 
+                cardCallbacks={this.props.cardCallbacks}
+                cards={this.props.cards.filter((card) => card.status === "done")
             }></List>
         </div>
       );
@@ -25,7 +31,8 @@ class KanbanBoard extends Component {
   
 KanbanBoard.propType = {
   cards : PropTypes.arrayOf(PropTypes.object),
-  taskCallbacks : PropTypes.object
+  taskCallbacks : PropTypes.object,
+  cardCallbacks : PropTypes.object
 
 }
 

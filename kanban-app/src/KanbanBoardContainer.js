@@ -141,23 +141,53 @@ class KanbanBoardContainer extends Component {
 
     updateCardStatus(cardId, listId) {
         let cardIndex = this.state.cards.findIndex((card)=>card.id === cardId);
-        let cards = this.state.cards;
-        let card = cards[cardIndex];
+        
+        let card = this.state.cards[cardIndex];
         if (card.status !== listId) {
-            card.status = listId;
-            this.setState({
-                cards : cards
-            
-            });
+            this.setState(update(this.state, {
+                cards : {
+                    [cardIndex] : {
+                        status : {$set:listId}
+                    }
+                }
+            }));
         }
     }
+
+    updateCardPosition(cardId, afterId) {
+        // 다른 카드 위로 드래그 할 떄만 진행한다.
+        if(cardId !== afterId) {
+            // 카드의 인덱스를 찾느다.
+            let cardIndex = this.state.cards.findIndex((card) => card.id === cardId);
+            // 현재 카드를 얻는다.
+            let card = this.state.cards[cardIndex];
+            //마우스로 가리키는 카드의 인덱스를 찾느다.
+            let afterIndex = this.state.cards.findIndex((card) => card.id === afterId);
+            // splice를 이용해 카드를 제거한 후 새로운 인덱스 위치로 삽입한다. 
+            this.setState(update(this.state, {
+                cards : {
+                    $splice : [
+                        [cardIndex, 1],
+                        [afterIndex, 0, card]
+                    ]
+                }
+            }));
+        }
+    }
+
     render(){
         return <KanbanBoard cards={this.state.cards}
                     taskCallbacks={{
                         toggle:this.toggleTask.bind(this),
                         delete:this.deleteTask.bind(this),
                         add:this.addTask.bind(this)
-                    }}></KanbanBoard>
+                    }}
+                    
+                    cardCallbacks={{
+                        updateStatus : this.updateCardStatus.bind(this),
+                        updatePosition : this.updateCardPosition.bind(this)
+                    }}    
+                ></KanbanBoard>
     }
 }
 

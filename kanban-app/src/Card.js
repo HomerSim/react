@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import CheckList from './CheckList';
 import marked from 'marked';
@@ -29,6 +30,7 @@ class Card extends Component {
             }
         );
     }
+
     render () {
         let cardDetails;
         if (this.state.showDetails) {
@@ -56,7 +58,6 @@ class Card extends Component {
         }
 
       return (
-        
         <div className="card">
             <div style={sideColor}></div>
             <div className={
@@ -80,7 +81,12 @@ class Card extends Component {
     description: PropTypes.string,
     color: PropTypes.string,
     tasks : PropTypes.arrayOf(PropTypes.object),
-    taskCallbacks:PropTypes.object
+    taskCallbacks:PropTypes.object,
+    cardCallbacks : PropTypes.object,
   }
+  
+  
+  
+  export default (Card);
 
-  export default Card;
+
