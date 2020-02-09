@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import KanbanBoard from './KanbanBoard';
 import update from 'react-addons-update';
+import {throttle} from './utils';
 
 import 'whatwg-fetch';
 import 'babel-polyfill';
@@ -21,6 +22,10 @@ class KanbanBoardContainer extends Component {
         this.state = {
             cards:[],
         };
+        // 인수가 변경된 경우에만 updatecardStatus 를 호출한다. 
+        this.updateCardStatus = throttle(this.updateCardStatus.bind(this));
+        // 최대 500ms 마다 (또는 인수가 변경된 경우) updateCardPosition을 호출한다. 
+        this.updatecardPosition = throttle(this.updateCardPosition.bind(this), 500);
     }
 
     componentDidMount() {
@@ -175,6 +180,17 @@ class KanbanBoardContainer extends Component {
         }
     }
 
+    persistCardDrag (cardId, status) {
+        //카드의 인덱스를 찾는다.
+        let cardIndex = this.state.cards.findIndex((card) => card.id === cardId);
+        //현재 카드를 얻는다. 
+        let card = this.state.cards[cardIndex];
+
+        // 이거 서버응답 하는 부분인데... 이부분은 쓰지말자... 저쪽 서버가 닫혀있음...
+
+    }
+
+
     render(){
         return <KanbanBoard cards={this.state.cards}
                     taskCallbacks={{
@@ -184,8 +200,9 @@ class KanbanBoardContainer extends Component {
                     }}
                     
                     cardCallbacks={{
-                        updateStatus : this.updateCardStatus.bind(this),
-                        updatePosition : this.updateCardPosition.bind(this)
+                        updateStatus : this.updateCardStatus,
+                        updatePosition : this.updateCardPosition,
+                        persistCardDrag : this.persistCardDrag.bind(this)
                     }}    
                 ></KanbanBoard>
     }
