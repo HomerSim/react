@@ -6,13 +6,14 @@ yarn add serialize-javascript
 
 yarn add marked
 
-//토글 부분 css 라는데 ...
+# 토글 부분 css 라는데 ...
 yarn add react-addons-css-transition-group
 
-#드래그앤 드랍
+# 드래그앤 드랍
 yarn add react-dnd react-dnd-html5-backend
 
-#
+# 모더라...
 yarn add react-addon-update
-#
-yarn add react-router
+
+# 라우트 
+yarn add react-router-dom
