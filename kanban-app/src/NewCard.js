@@ -20,7 +20,12 @@ class NewCard extends Component {
     }
 
     handleSubmit(e) {
-        this.props.history.pushState(null, '/');
+        this.props.history.push('/');
+    }
+
+    handleClose(e) {
+        //this.props.history.pushState(null, '/'); // 이게 아니라 아래처럼 사용해야함 V4
+        this.props.history.push('/');
     }
 
     render() {

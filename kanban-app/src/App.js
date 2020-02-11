@@ -5,6 +5,15 @@ import './App.css';
 
 import KanbanBoardContainer from './KanbanBoardContainer';
 
+
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+//import createBrowserHistory from 'history/lib/createBrowserHistory';
+import KanbanBoard from './KanbanBoard';
+import EditCard from './EditCard';
+import NewCard from './NewCard';
+
+
 /*
 let cardsList = [
   {
@@ -42,14 +51,38 @@ let cardsList = [
 ];
 */
 class App extends Component {
-  render () {
+  /*render () {
     return (
       <KanbanBoardContainer></KanbanBoardContainer>
-      /*
-      <KanbanBoard cards={cardsList}>Hello ~ Homersim</KanbanBoard>
-      */
+      
+      //<KanbanBoard cards={cardsList}>Hello ~ Homersim</KanbanBoard>
+      
+    );
+  }*/
+
+  render (){
+    return(
+      <Router>
+        <Route path="/" component={KanbanBoardContainer} />
+        <Route path="/new" component={NewCard} />  
+        <Route path="/edit/:card_id" component={EditCard} />        
+      </Router>
     );
   }
+  /*
+  render (){
+    return(
+      <Router>
+        <Route component={KanbanBoardContainer}>
+            <Route path="/" component={KanbanBoard}>
+                <Route path="new" component={NewCard} />
+                <Route path="edit/:card_id" component={EditCard} />
+            </Route>
+        </Route>
+      </Router>
+    );
+  }
+  */
 }
 
 

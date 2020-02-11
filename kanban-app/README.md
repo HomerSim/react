@@ -14,3 +14,5 @@ yarn add react-dnd react-dnd-html5-backend
 
 #
 yarn add react-addon-update
+#
+yarn add react-router

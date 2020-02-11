@@ -1,5 +1,5 @@
 import React, {Component} from  'react';
-import PropTypes from 'prop_types';
+import PropTypes from 'prop-types';
 
 class CardFrom extends Component {
 
@@ -45,7 +45,6 @@ class CardFrom extends Component {
                             value={this.props.draftCard.color}
                             onChange={this.handleChange.bind(this, 'color')}
                             type="color"
-                            defaultValue="#ff0000" 
                         />
                         <div className="actions">
                             <button type="submit">{this.props.buttonLabel}</button>

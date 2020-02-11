@@ -16,6 +16,9 @@ const API_HEADERS = {
 };
 // 다음단계 넘어가기전에 처리하자........
 
+
+
+
 class KanbanBoardContainer extends Component {
     constructor(){
         super(...arguments);
@@ -190,6 +193,47 @@ class KanbanBoardContainer extends Component {
 
     }
 
+    addCard(card) {
+        // 낙관적인 UI 변경을 되돌려야 하는 경우를 대비해 
+        // 변경하기 전 원래 상태에 대한 참조를 저장한다.
+        let prevState = this.state;
+
+        //  카드에 임시 ID를 부여한다. 
+        if (card.id === null) {
+            let card = Object.assign({}, card, {id:Date.now()});
+        }
+
+        // 새로운 객체를 생성화고 카드의 배열로 새로운 카드를 푸시한다. 
+        let nextState = update(this.state.cards, {$push:[card]});
+
+        // 변경된 객체로 컴포넌트 상태를 설정한다. 
+        this.setState({cards:nextState});
+
+        // API를 호출해 서버에 카드를 추가한다.
+        // 이건 안함 ~ 
+
+    }
+
+    updateCard(card) {
+        // 낙관적인 UI 변경을 되돌려야 하는 경우를 대비해
+        // 변경하기 전 원래 상태에 대한 참조를 저장한다. 
+        let prevState = this.state;
+
+        // 카드의 인덱스를 찾는다. 
+        let cardIndex = this.state.cards.findIndex((c) => c.id === card.id);
+
+        // $set 명령을 이용해 카드 전체를 변경한다. 
+        let nextState = update(
+            this.state.cards, {
+                [cardIndex] : {$set:card}
+            }
+        );
+
+        // 변경된 객체로 컴포넌트 상태를 설정한다. 
+        this.setState({cards:nextState});
+
+        // 서버통신은 안해 ~ 
+    }
 
     render(){
         return <KanbanBoard cards={this.state.cards}
@@ -200,12 +244,35 @@ class KanbanBoardContainer extends Component {
                     }}
                     
                     cardCallbacks={{
-                        updateStatus : this.updateCardStatus,
-                        updatePosition : this.updateCardPosition,
+                        addCard : this.addCard.bind(this),
+                        updateCard : this.updateCard.bind(this),
+                        updateStatus : this.updateCardStatus.bind(this),
+                        updatePosition : this.updateCardPosition.bind(this),
                         persistCardDrag : this.persistCardDrag.bind(this)
                     }}    
                 ></KanbanBoard>
     }
-}
+/*
+    render (){
+        let kanbanBoard = this.props.children && React.cloneElement(this.props.children, {
+            cards:this.state.cards,
+            taskCallbacks:{
+                toggle:this.toggleTask.bind(this),
+                delete:this.deleteTask.bind(this),
+                add:this.addTask.bind(this)                
+            },
+            cardCallbacks:{
+                addCard:this.addCard.bind(this),
+                updateCard : this.updateCard.bind(this),
+                updateStatus : this.updateCardStatus.bind(this),
+                updatePosition : this.updateCardPosition.bind(this),
+                persistCardDrag : this.persistCardDrag.bind(this)
+            }
+        });
 
-export default KanbanBoardContainer;
+        return kanbanBoard;
+    }*/
+ }
+
+
+export default (KanbanBoardContainer);
