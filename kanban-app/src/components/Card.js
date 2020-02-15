@@ -4,7 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import CheckList from './CheckList';
 import marked from 'marked';
 import PropTypes from 'prop-types';
-import constants from './constants';
+import constants from '../constants';
 
 let titlePropType = (props, propName, componentName) => {
     if(props[propName]) {

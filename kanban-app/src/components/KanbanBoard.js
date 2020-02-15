@@ -35,37 +35,33 @@ class KanbanBoard extends Component {
     }
   */
     render () {
-      let cardModal = this.props.children && React.cloneElement(this.props.children, {
-        cards: this.props.cards,
-        cardCallbacks:this.props.cardCallbacks
-      });
-
       
       return (
-          <div className="app">
-            <Link to="/new" className="float-button">+</Link>
-            <DndProvider backend={HTML5Backend}>
-              <List id="todo" title="TO DO" 
-                    taskCallbacks={this.props.taskCallbacks}
-                    cardCallbacks={this.props.cardCallbacks}
-                    cards={this.props.cards.filter((card) => card.status === "todo")
-                }></List>
+          <div>
+            <div className="app">
+              <Link to="/new" className="float-button">+</Link>
+              <DndProvider backend={HTML5Backend}>
+                <List id="todo" title="TO DO" 
+                      taskCallbacks={this.props.taskCallbacks}
+                      cardCallbacks={this.props.cardCallbacks}
+                      cards={this.props.cards.filter((card) => card.status === "todo")
+                  }></List>
 
-                <List id="in-progress" title="In Progress" 
-                    taskCallbacks={this.props.taskCallbacks} 
-                    cardCallbacks={this.props.cardCallbacks}
-                    cards={this.props.cards.filter((card) => card.status === "in-progress")
-                }></List>
+                  <List id="in-progress" title="In Progress" 
+                      taskCallbacks={this.props.taskCallbacks} 
+                      cardCallbacks={this.props.cardCallbacks}
+                      cards={this.props.cards.filter((card) => card.status === "in-progress")
+                  }></List>
 
-                <List id="done" title="Done" 
-                    taskCallbacks={this.props.taskCallbacks} 
-                    cardCallbacks={this.props.cardCallbacks}
-                    cards={this.props.cards.filter((card) => card.status === "done")
-                }></List> 
-            </DndProvider>
-            {cardModal}
+                  <List id="done" title="Done" 
+                      taskCallbacks={this.props.taskCallbacks} 
+                      cardCallbacks={this.props.cardCallbacks}
+                      cards={this.props.cards.filter((card) => card.status === "done")
+                  }></List> 
+              </DndProvider>
+             
+            </div>
           </div>
-
       );
     }
     

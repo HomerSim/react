@@ -17,3 +17,6 @@ yarn add react-addon-update
 
 ### 라우트 
 yarn add react-router-dom
+
+### flux
+yarn add flux

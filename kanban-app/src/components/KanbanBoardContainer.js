@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import KanbanBoard from './KanbanBoard';
 import update from 'react-addons-update';
-import {throttle} from './utils';
+import {throttle} from '../utils';
 
 import 'whatwg-fetch';
 import 'babel-polyfill';
+
 
 
 //const API_URL = "http://kanbanapi.pro-react.com";
@@ -194,6 +195,7 @@ class KanbanBoardContainer extends Component {
     }
 
     addCard(card) {
+        console.log(card);
         // 낙관적인 UI 변경을 되돌려야 하는 경우를 대비해 
         // 변경하기 전 원래 상태에 대한 참조를 저장한다.
         let prevState = this.state;
@@ -236,21 +238,33 @@ class KanbanBoardContainer extends Component {
     }
 
     render(){
-        return <KanbanBoard cards={this.state.cards}
-                    taskCallbacks={{
-                        toggle:this.toggleTask.bind(this),
-                        delete:this.deleteTask.bind(this),
-                        add:this.addTask.bind(this)
-                    }}
-                    
-                    cardCallbacks={{
-                        addCard : this.addCard.bind(this),
-                        updateCard : this.updateCard.bind(this),
-                        updateStatus : this.updateCardStatus.bind(this),
-                        updatePosition : this.updateCardPosition.bind(this),
-                        persistCardDrag : this.persistCardDrag.bind(this)
-                    }}    
-                ></KanbanBoard>
+        let cardCall = {
+            addCard : this.addCard.bind(this),
+            updateCard : this.updateCard.bind(this),
+            updateStatus : this.updateCardStatus.bind(this),
+            updatePosition : this.updateCardPosition.bind(this),
+            persistCardDrag : this.persistCardDrag.bind(this)
+        };
+
+        return (
+                <div>
+                    <KanbanBoard cards={this.state.cards}
+                        taskCallbacks={{
+                            toggle:this.toggleTask.bind(this),
+                            delete:this.deleteTask.bind(this),
+                            add:this.addTask.bind(this)
+                        }}
+                        
+                        cardCallbacks={{
+                            addCard : this.addCard.bind(this),
+                            updateCard : this.updateCard.bind(this),
+                            updateStatus : this.updateCardStatus.bind(this),
+                            updatePosition : this.updateCardPosition.bind(this),
+                            persistCardDrag : this.persistCardDrag.bind(this)
+                        }}    
+                    ></KanbanBoard>
+                </div>
+        )
     }
 /*
     render (){

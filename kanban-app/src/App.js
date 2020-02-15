@@ -3,15 +3,11 @@ import React, {Component} from 'react';
 import './App.css';
 //import KanbanBoard from './KanbanBoard';
 
-import KanbanBoardContainer from './KanbanBoardContainer';
+import KanbanBoardContainer from './components/KanbanBoardContainer';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
-
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-//import createBrowserHistory from 'history/lib/createBrowserHistory';
-import KanbanBoard from './KanbanBoard';
-import EditCard from './EditCard';
-import NewCard from './NewCard';
+import NewCard from './components/NewCard';
+import EditCard from './components/EditCard';
 
 
 /*
@@ -60,12 +56,15 @@ class App extends Component {
     );
   }*/
 
+
+
   render (){
     return(
       <Router>
-        <Route path="/" component={KanbanBoardContainer} />
-        <Route path="/new" component={NewCard} />  
-        <Route path="/edit/:card_id" component={EditCard} />        
+          <Route path="/" component={KanbanBoardContainer} />
+          <Route path="/new"   render={(props) => <NewCard {...props}></NewCard>} />  
+          <Route path="/edit/:card_id" component={EditCard} />        
+        
       </Router>
     );
   }

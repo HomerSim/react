@@ -2,7 +2,15 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import CardForm from './CardForm';
 
+
 class NewCard extends Component {
+
+
+    componentDidMount() {
+        console.log(2);
+        console.log(this.props);
+
+    }
 
     componentWillMount() {
         this.setState({
@@ -13,6 +21,9 @@ class NewCard extends Component {
             color:'#c9c9c9',
             tasks:[]
         });
+        console.log(1);
+        console.log(this.props);
+        
     }
 
     handleChange(field, value) {
@@ -20,7 +31,14 @@ class NewCard extends Component {
     }
 
     handleSubmit(e) {
-        this.props.history.push('/');
+        e.preventDefault();
+        console.log(this.state);
+        console.log(this.props);
+        
+        //this.props.cardModal.cardCallbacks.addCard(this.state);
+       // this.addCard(this.state);
+        //this.props.cardCallbacks.addCard(this.state);
+        //this.props.history.push('/');
     }
 
     handleClose(e) {
@@ -28,7 +46,10 @@ class NewCard extends Component {
         this.props.history.push('/');
     }
 
+    
+
     render() {
+        
         return (
             <CardForm draftCard={this.state}
                 buttonLabel="Create Card"
